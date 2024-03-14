@@ -1,0 +1,17 @@
+### get users
+GET http://localhost:3000/api/users
+
+### get users query params
+GET http://localhost:3000/api/users?page=10&limit=100
+
+### get users query params sin limit
+GET http://localhost:3000/api/users?page=10
+
+### Post users
+POST http://localhost:3000/api/users
+Content-Type:  application/json
+
+{
+    "name": "Juan Carlos",
+    "lastname": "Valdés"
+}

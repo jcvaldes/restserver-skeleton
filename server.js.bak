@@ -1,0 +1,54 @@
+const express = require("express");
+
+class Server {
+  constructor() {
+    this.app = express();
+    this.port = process.env.PORT;
+    // Middlewares
+    this.middlewares();
+    // Rutas de mi aplicación
+    this.routes();
+  }
+
+  middlewares() {
+    // Directorio Público
+    this.app.use(express.static("public"));
+  }
+
+  routes() {
+    this.app.get("/api", function (req, res) {
+      // res.send("hello world");
+      res.json({
+        msg: "get api",
+      });
+    });
+    this.app.post("/api", function (req, res) {
+      res.status(201).json({
+        msg: "post api",
+      });
+    });
+    this.app.delete("/api", function (req, res) {
+      res.json({
+        msg: "delete api",
+      });
+    });
+    this.app.put("/api", function (req, res) {
+      res.json({
+        msg: "put api",
+      });
+    });
+    this.app.patch("/api", function (req, res) {
+      res.json({
+        msg: "patch api",
+      });
+    });
+  }
+
+  listen() {
+    this.app.listen(this.port, () => {
+      console.log("Servidor corriendo en puerto", this.port);
+    });
+  }
+}
+
+module.exports = Server;
