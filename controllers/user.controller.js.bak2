@@ -1,0 +1,76 @@
+const { response, request } = require("express");
+const bcryptjs = require("bcryptjs");
+const User = require("../models/user");
+const { validationResult } = require("express-validator");
+
+const userGet = (req = request, res = response) => {
+  const { q, page = 1, limit = 10 } = req.query;
+  res.json({
+    msg: "get api",
+    q,
+    page: +page,
+    limit: +limit,
+  });
+};
+
+const userPost = async (req, res = response) => {
+  // const { name, lastname } = req.body;
+  // res.json({
+  //   msg: "post api",
+  //   name,
+  //   lastname,
+  // });
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json(errors);
+  }
+
+  const { nombre, correo, password, rol } = req.body;
+  const user = new User({ nombre, correo, password, rol });
+
+  // Encriptar la contraseña
+  const salt = bcryptjs.genSaltSync();
+  user.password = bcryptjs.hashSync(password, salt);
+
+  // verificar email existe
+  const existeEmail = await User.findOne({ correo });
+  if (existeEmail) {
+    return res.status(400).json({
+      msg: "Ese corre esta registrado",
+    });
+  }
+  // Guardar en BD
+  await user.save();
+
+  res.json({
+    user,
+  });
+};
+
+const userDelete = (req, res = response) => {
+  res.json({
+    msg: "delete api",
+  });
+};
+
+const userPut = (req = request, res = response) => {
+  const { id } = req.params.id;
+  res.json({
+    msg: "put api",
+    id,
+  });
+};
+const userPatch = (req, res = response) => {
+  // res.send("hello world");
+  res.json({
+    msg: "patch api",
+  });
+};
+module.exports = {
+  userGet,
+  userPost,
+  userDelete,
+  userPut,
+  userPatch,
+};

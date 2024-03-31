@@ -2,16 +2,43 @@
 GET http://localhost:3000/api/users
 
 ### get users query params
-GET http://localhost:3000/api/users?page=10&limit=100
+GET http://localhost:3000/api/users?limit=100
+0
 
-### get users query params sin limit
-GET http://localhost:3000/api/users?page=10
-
-### Post users
+### Create User
 POST http://localhost:3000/api/users
 Content-Type:  application/json
 
 {
-    "name": "Juan Carlos",
-    "lastname": "Valdés"
+    "nombre": "test15",
+    "correo": "test15@gmail.com",
+    "password": "123456",
+    "rol": "USER_ROLE"
 }
+
+### Update User
+PUT http://localhost:3000/api/users/6606d8009d74c1da553f3af8
+Content-Type:  application/json
+
+{
+    "nombre": "Juan Carlos",
+    "correo": "idevkings@gmail.com",
+    "password": "123456",
+    "rol": "ADMINs_ROLE"
+}
+
+
+### Auth User
+POST http://localhost:3000/api/auth/login
+Content-Type:  application/json
+
+{
+    "correo": "idevkings@gmail.com",
+    "password": "123456"
+}
+
+
+### Delete User
+DELETE http://localhost:3000/api/users/6606d8009d74c1da553f3af8
+Content-Type:  application/json
+x-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjA2ZDgwMDlkNzRjMWRhNTUzZjNhZjgiLCJpYXQiOjE3MTE4MTc0MDAsImV4cCI6MTcxMTgzMTgwMH0.j8ejQyV2ZoVxYOtdtX2IqZZd3NkvgzqbhyI2O8i5Mgs
