@@ -5,7 +5,7 @@ const {
   userDelete,
   userPut,
   userPatch,
-} = require("../controllers/user.controller");
+} = require("../controllers/users.controller");
 const { check } = require("express-validator");
 const {
   isRoleValid,

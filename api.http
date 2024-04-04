@@ -37,7 +37,13 @@ Content-Type:  application/json
     "password": "123456"
 }
 
+### Google Identity
+POST http://localhost:3000/api/auth/google
+Content-Type:  application/json
 
+{
+    "id_token": "212dsds"
+}
 ### Delete User
 DELETE http://localhost:3000/api/users/6606d8009d74c1da553f3af8
 Content-Type:  application/json
